@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Real Dreams — Pastelería Creativa | Valladolid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blush:#f7d6d8;
+  --blush-deep:#eea8ae;
+  --cream:#fdf6ee;
+  --cream-dark:#f5e8d6;
+  --gold:#c9a96e;
+  --gold-light:#e8d5a3;
+  --gold-dark:#a07840;
+  --mint:#b8ddd4;
+  --mint-light:#d6ede8;
+  --white:#fff;
+  --dark:#2a1f1a;
+  --text:#4a3728;
+  --text-light:#7a6058;
+  --font-display:'Cormorant Garamond',Georgia,serif;
+  --font-script:'Dancing Script',cursive;
+  --font-body:'DM Sans',sans-serif;
+  --radius:16px;
+  --shadow:0 8px 40px rgba(42,31,26,0.10);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--cream);color:var(--text);overflow-x:hidden}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--cream-dark)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+
+/* ─── ANIMATIONS ─── */
+.animate{opacity:0;transform:translateY(36px);transition:opacity 0.7s ease,transform 0.7s ease}
+.animate.visible{opacity:1;transform:none}
+.animate-left{opacity:0;transform:translateX(-40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.animate-left.visible{opacity:1;transform:none}
+.animate-right{opacity:0;transform:translateX(40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.animate-right.visible{opacity:1;transform:none}
+.animate-scale{opacity:0;transform:scale(0.92);transition:opacity 0.6s ease,transform 0.6s ease}
+.animate-scale.visible{opacity:1;transform:scale(1)}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}.d4{transition-delay:0.4s}.d5{transition-delay:0.5s}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5vw;height:68px;
+  background:rgba(253,246,238,0.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(201,169,110,0.18);
+  transition:box-shadow 0.3s
+}
+nav.scrolled{box-shadow:0 4px 24px rgba(42,31,26,0.09)}
+.nav-logo{font-family:var(--font-script);font-size:1.55rem;color:var(--gold-dark);letter-spacing:0.01em;text-decoration:none}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{font-size:0.82rem;font-weight:500;color:var(--text-light);text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--gold-dark)}
+.nav-cta{
+  background:var(--gold);color:var(--white);border:none;border-radius:50px;
+  padding:0.5rem 1.3rem;font-family:var(--font-body);font-size:0.82rem;font-weight:500;
+  cursor:pointer;text-decoration:none;letter-spacing:0.04em;
+  transition:background 0.2s,transform 0.15s;display:flex;align-items:center;gap:0.4rem
+}
+.nav-cta:hover{background:var(--gold-dark);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hamburger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s}
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:var(--cream);flex-direction:column;padding:1.5rem 5vw;border-bottom:1px solid var(--blush);gap:1rem}
+  .nav-links.open{display:flex}
+  .hamburger{display:flex}
+  .nav-cta{padding:0.45rem 1rem;font-size:0.78rem}
+}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;position:relative;overflow:hidden;
+  padding:100px 5vw 60px;
+  background:linear-gradient(155deg,#fdf0f2 0%,#fdf6ee 40%,#edf7f4 100%)
+}
+.hero-bg-shapes{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hero-circle1{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(247,214,216,0.45) 0%,transparent 70%);top:-150px;right:-150px}
+.hero-circle2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(184,221,212,0.35) 0%,transparent 70%);bottom:-100px;left:-80px}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(201,169,110,0.12) 1.5px,transparent 1.5px);background-size:28px 28px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.3);
+  border-radius:50px;padding:0.35rem 1rem;font-size:0.75rem;color:var(--gold-dark);
+  letter-spacing:0.08em;text-transform:uppercase;font-weight:500;
+  margin-bottom:1.8rem
+}
+.hero h1{
+  font-family:var(--font-display);font-size:clamp(3rem,8vw,6.5rem);font-weight:300;
+  color:var(--dark);line-height:1.05;letter-spacing:-0.02em;margin-bottom:0.3rem
+}
+.hero h1 em{font-style:italic;color:var(--gold-dark)}
+.hero-tagline{
+  font-family:var(--font-script);font-size:clamp(1.5rem,3.5vw,2.4rem);
+  color:var(--blush-deep);margin-bottom:1.8rem;letter-spacing:0.02em
+}
+.hero-desc{
+  max-width:560px;font-size:1.02rem;color:var(--text-light);
+  line-height:1.7;margin-bottom:2.8rem
+}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:3rem}
+.btn-primary{
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-dark) 100%);
+  color:var(--white);border:none;border-radius:50px;padding:0.85rem 2.2rem;
+  font-family:var(--font-body);font-size:0.95rem;font-weight:500;cursor:pointer;
+  text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;
+  box-shadow:0 6px 24px rgba(160,120,64,0.28);transition:transform 0.2s,box-shadow 0.2s
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(160,120,64,0.38)}
+.btn-whatsapp{
+  background:linear-gradient(135deg,#25d366 0%,#128c7e 100%);
+  color:var(--white);border:none;border-radius:50px;padding:0.85rem 2.2rem;
+  font-family:var(--font-body);font-size:0.95rem;font-weight:500;cursor:pointer;
+  text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;
+  box-shadow:0 6px 24px rgba(18,140,126,0.28);transition:transform 0.2s,box-shadow 0.2s
+}
+.btn-whatsapp:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(18,140,126,0.38)}
+.btn-outline{
+  background:transparent;color:var(--gold-dark);border:1.5px solid var(--gold);
+  border-radius:50px;padding:0.82rem 2rem;font-family:var(--font-body);
+  font-size:0.93rem;font-weight:500;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.2s
+}
+.btn-outline:hover{background:var(--gold);color:var(--white)}
+.hero-images{
+  display:grid;grid-template-columns:1fr 1.2fr 1fr;gap:1rem;
+  max-width:800px;width:100%;align-items:end
+}
+.hero-img-wrap{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.hero-img-wrap.tall{transform:translateY(-20px)}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-img-wrap:nth-child(1){height:220px}
+.hero-img-wrap:nth-child(2){height:280px}
+.hero-img-wrap:nth-child(3){height:240px}
+@media(max-width:600px){
+  .hero-images{grid-template-columns:1fr 1fr;max-width:400px}
+  .hero-img-wrap:nth-child(3){display:none}
+  .hero-img-wrap:nth-child(1),.hero-img-wrap:nth-child(2),.hero-img-wrap:nth-child(3){height:180px}
+}
+
+/* ─── STATUS BADGE ─── */
+.status-bar{
+  display:flex;align-items:center;justify-content:center;gap:0.6rem;
+  padding:0.6rem 1.4rem;border-radius:50px;margin-bottom:1.5rem;
+  font-size:0.82rem;font-weight:500;letter-spacing:0.04em;
+  background:rgba(255,255,255,0.7);border:1px solid rgba(201,169,110,0.2);
+  width:fit-content
+}
+.status-dot{width:8px;height:8px;border-radius:50%;animation:pulse 2s infinite}
+.status-open{background:rgba(37,211,102,0.15);border-color:rgba(37,211,102,0.3)}
+.status-open .status-dot{background:#25d366}
+.status-closed{background:rgba(220,80,80,0.1);border-color:rgba(220,80,80,0.2)}
+.status-closed .status-dot{background:#dc5050}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(1.3)}}
+
+/* ─── SECTION COMMONS ─── */
+section{padding:90px 5vw}
+.section-label{
+  font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--gold);font-weight:500;margin-bottom:0.8rem;display:block
+}
+.section-title{
+  font-family:var(--font-display);font-size:clamp(2.2rem,4.5vw,3.4rem);
+  font-weight:300;color:var(--dark);line-height:1.15;letter-spacing:-0.01em
+}
+.section-title em{font-style:italic;color:var(--gold-dark)}
+.section-desc{
+  font-size:1.02rem;color:var(--text-light);line-height:1.75;
+  max-width:600px;margin-top:1rem
+}
+.divider{
+  width:60px;height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--blush-deep));
+  border-radius:2px;margin:1.2rem 0
+}
+
+/* ─── ABOUT ─── */
+.about{background:var(--white)}
+.about-inner{
+  display:grid;grid-template-columns:1fr 1fr;gap:5vw;
+  align-items:center;max-width:1100px;margin:0 auto
+}
+.about-img-collage{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  grid-template-rows:auto auto
+}
+.about-img{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.about-img img{width:100%;height:100%;object-fit:cover;display:block}
+.about-img:nth-child(1){height:200px}
+.about-img:nth-child(2){height:200px;margin-top:30px}
+.about-img:nth-child(3){grid-column:1/-1;height:180px}
+.about-highlight{
+  margin-top:1.8rem;background:linear-gradient(135deg,var(--cream) 0%,var(--mint-light) 100%);
+  border-radius:var(--radius);padding:1.5rem;border-left:3px solid var(--gold)
+}
+.about-highlight p{font-family:var(--font-display);font-size:1.15rem;font-style:italic;color:var(--gold-dark);line-height:1.6}
+.about-stats{display:flex;gap:2rem;margin-top:2rem;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-family:var(--font-display);font-size:2.2rem;font-weight:600;color:var(--gold-dark)}
+.stat-label{font-size:0.78rem;color:var(--text-light);letter-spacing:0.05em;text-transform:uppercase}
+@media(max-width:768px){
+  .about-inner{grid-template-columns:1fr}
+  .about-img-collage{order:-1}
+}
+
+/* ─── SERVICES ─── */
+.services{background:linear-gradient(160deg,var(--cream) 0%,#f5eef7 100%)}
+.services-inner{max-width:1100px;margin:0 auto}
+.services-header{text-align:center;margin-bottom:3.5rem}
+.services-header .divider{margin:1.2rem auto}
+.services-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1.4rem
+}
+.service-card{
+  background:var(--white);border-radius:20px;padding:2rem 1.8rem;
+  box-shadow:0 4px 20px rgba(42,31,26,0.07);
+  border:1px solid rgba(247,214,216,0.5);
+  transition:transform 0.25s,box-shadow 0.25s;position:relative;overflow:hidden
+}
+.service-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--blush-deep))
+}
+.service-card:hover{transform:translateY(-5px);box-shadow:0 12px 36px rgba(42,31,26,0.13)}
+.service-icon{font-size:2.4rem;margin-bottom:1rem;display:block}
+.service-name{font-family:var(--font-display);font-size:1.35rem;font-weight:600;color:var(--dark);margin-bottom:0.5rem}
+.service-desc{font-size:0.88rem;color:var(--text-light);line-height:1.65}
+.service-tag{
+  display:inline-block;margin-top:0.8rem;background:var(--cream-dark);
+  color:var(--gold-dark);font-size:0.72rem;padding:0.25rem 0.7rem;
+  border-radius:50px;letter-spacing:0.04em;font-weight:500
+}
+
+/* ─── HOW IT WORKS ─── */
+.how{background:var(--white)}
+.how-inner{max-width:960px;margin:0 auto}
+.how-header{text-align:center;margin-bottom:3.5rem}
+.how-header .divider{margin:1.2rem auto}
+.steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;position:relative}
+.steps::before{
+  content:'';position:absolute;top:60px;left:16.5%;right:16.5%;
+  height:2px;background:linear-gradient(90deg,var(--gold-light),var(--blush-deep),var(--mint));
+  z-index:0
+}
+.step{text-align:center;position:relative;z-index:1}
+.step-num{
+  width:72px;height:72px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold-light) 0%,var(--gold) 100%);
+  color:var(--white);font-family:var(--font-display);font-size:1.8rem;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1.2rem;box-shadow:0 6px 20px rgba(201,169,110,0.3)
+}
+.step-title{font-family:var(--font-display);font-size:1.25rem;font-weight:600;color:var(--dark);margin-bottom:0.5rem}
+.step-desc{font-size:0.88rem;color:var(--text-light);line-height:1.6}
+@media(max-width:600px){
+  .steps{grid-template-columns:1fr;gap:2.5rem}
+  .steps::before{display:none}
+}
+
+/* ─── GALLERY ─── */
+.gallery{background:linear-gradient(160deg,var(--cream-dark) 0%,var(--mint-light) 100%)}
+.gallery-inner{max-width:1100px;margin:0 auto}
+.gallery-header{text-align:center;margin-bottom:2.5rem}
+.gallery-header .divider{margin:1.2rem auto}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  grid-template-rows:280px 280px;
+  gap:12px
+}
+.gallery-item{border-radius:var(--radius);overflow:hidden;position:relative;cursor:pointer}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease}
+.gallery-item:hover img{transform:scale(1.04)}
+.gallery-item.span-rows{grid-row:1/3}
+.gallery-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(42,31,26,0.5) 0%,transparent 60%);
+  opacity:0;transition:opacity 0.3s
+}
+.gallery-item:hover .gallery-overlay{opacity:1}
+@media(max-width:640px){
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .gallery-item.span-rows{grid-row:auto;grid-column:1/-1;height:240px}
+  .gallery-item{height:160px}
+}
+
+/* ─── TESTIMONIALS ─── */
+.testimonials{background:var(--white)}
+.testimonials-inner{max-width:900px;margin:0 auto;text-align:center}
+.testimonials-inner .divider{margin:1.2rem auto}
+.reviews-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+.review-card{
+  background:linear-gradient(135deg,var(--cream) 0%,var(--blush) 100%);
+  border-radius:20px;padding:2rem;text-align:left;
+  border:1px solid rgba(247,214,216,0.6);
+  box-shadow:0 4px 16px rgba(42,31,26,0.06)
+}
+.stars{color:var(--gold);font-size:1rem;letter-spacing:0.1em;margin-bottom:0.8rem}
+.review-text{font-family:var(--font-display);font-size:1.05rem;font-style:italic;color:var(--dark);line-height:1.65;margin-bottom:1rem}
+.reviewer{font-size:0.8rem;color:var(--text-light);font-weight:500;letter-spacing:0.04em;text-transform:uppercase}
+.trust-badges{
+  display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;
+  margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--cream-dark)
+}
+.trust-item{display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:var(--text-light);font-weight:500}
+.trust-icon{font-size:1.3rem}
+@media(max-width:600px){
+  .reviews-grid{grid-template-columns:1fr}
+}
+
+/* ─── HOURS ─── */
+.hours-section{
+  background:linear-gradient(135deg,var(--dark) 0%,#3a2820 100%);
+  color:var(--cream);padding:80px 5vw
+}
+.hours-inner{
+  max-width:900px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:4vw;align-items:start
+}
+.hours-info .section-label{color:var(--gold-light)}
+.hours-info .section-title{color:var(--cream)}
+.hours-info .section-desc{color:rgba(253,246,238,0.7)}
+.hours-note{
+  margin-top:1.5rem;background:rgba(201,169,110,0.15);
+  border-radius:12px;padding:1.2rem;border:1px solid rgba(201,169,110,0.25)
+}
+.hours-note p{font-size:0.88rem;color:var(--gold-light);line-height:1.6}
+.hours-table{}
+.day-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0.7rem 0;border-bottom:1px solid rgba(253,246,238,0.08)
+}
+.day-row:last-child{border-bottom:none}
+.day-name{font-size:0.88rem;color:rgba(253,246,238,0.75);font-weight:400;letter-spacing:0.03em}
+.day-hours{font-size:0.88rem;color:var(--cream);font-weight:500}
+.day-row.today{
+  background:rgba(201,169,110,0.18);border-radius:8px;
+  padding:0.7rem 0.8rem;border-bottom:none;margin-bottom:2px
+}
+.day-row.today .day-name{color:var(--gold-light);font-weight:600}
+.day-row.today .day-hours{color:var(--gold-light)}
+.today-label{
+  font-size:0.7rem;background:var(--gold);color:var(--white);
+  padding:0.15rem 0.5rem;border-radius:4px;margin-left:0.5rem;font-weight:600;
+  letter-spacing:0.04em;text-transform:uppercase
+}
+@media(max-width:640px){
+  .hours-inner{grid-template-columns:1fr}
+}
+
+/* ─── MAP & CONTACT ─── */
+.contact{background:var(--cream)}
+.contact-inner{max-width:1100px;margin:0 auto}
+.contact-grid{
+  display:grid;grid-template-columns:1fr 1.5fr;
+  gap:3vw;margin-top:2.5rem
+}
+.contact-details{}
+.contact-item{
+  display:flex;gap:1rem;align-items:flex-start;
+  margin-bottom:1.8rem;padding:1.2rem;
+  background:var(--white);border-radius:var(--radius);
+  box-shadow:0 2px 12px rgba(42,31,26,0.06)
+}
+.contact-item-icon{font-size:1.5rem;flex-shrink:0;margin-top:2px}
+.contact-item-text strong{display:block;font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:0.25rem;font-weight:600}
+.contact-item-text a,.contact-item-text p{font-size:0.95rem;color:var(--text);text-decoration:none;line-height:1.5}
+.contact-item-text a:hover{color:var(--gold-dark)}
+.contact-ctas{display:flex;flex-direction:column;gap:0.8rem;margin-top:1rem}
+.map-wrap{border-radius:20px;overflow:hidden;box-shadow:var(--shadow);height:420px}
+.map-wrap iframe{width:100%;height:100%;border:none}
+@media(max-width:640px){
+  .contact-grid{grid-template-columns:1fr}
+  .map-wrap{height:280px}
+}
+
+/* ─── WHATSAPP FLOATING ─── */
+.wa-float{
+  position:fixed;bottom:28px;right:28px;z-index:999;
+  width:58px;height:58px;border-radius:50%;
+  background:linear-gradient(135deg,#25d366,#128c7e);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 24px rgba(18,140,126,0.38);
+  text-decoration:none;transition:transform 0.2s,box-shadow 0.2s
+}
+.wa-float:hover{transform:scale(1.08);box-shadow:0 10px 32px rgba(18,140,126,0.5)}
+.wa-float svg{width:28px;height:28px;fill:#fff}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--dark);color:rgba(253,246,238,0.65);
+  padding:3rem 5vw 2rem;text-align:center
+}
+.footer-logo{font-family:var(--font-script);font-size:2rem;color:var(--gold-light);margin-bottom:0.5rem}
+.footer-tagline{font-family:var(--font-display);font-style:italic;font-size:1rem;margin-bottom:1.5rem;color:rgba(253,246,238,0.5)}
+.footer-links{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.footer-links a{font-size:0.8rem;color:rgba(253,246,238,0.5);text-decoration:none;letter-spacing:0.05em;text-transform:uppercase;transition:color 0.2s}
+.footer-links a:hover{color:var(--gold-light)}
+.footer-copy{font-size:0.75rem;color:rgba(253,246,238,0.3)}
+.footer-copy a{color:var(--gold);text-decoration:none}
+.footer-address{font-size:0.82rem;margin-bottom:1rem;line-height:1.6}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#inicio" class="nav-logo">Real Dreams</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#sobre-nosotros">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="tel:+34602825808" class="nav-cta">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h2.8c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.2.3.1.7-.2 1l-2.2 2.2z"/></svg>
+    Llamar
+  </a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg-shapes">
+    <div class="hero-circle1"></div>
+    <div class="hero-circle2"></div>
+    <div class="hero-dots"></div>
+  </div>
+
+  <div class="animate" style="text-align:center;z-index:1;width:100%;max-width:720px">
+    <div id="status-badge" class="status-bar" style="margin:0 auto 1.5rem"></div>
+    <div class="hero-badge">✨ Pastelería Creativa · Valladolid</div>
+    <h1>Real <em>Dreams</em></h1>
+    <p class="hero-tagline">Tu celebración, hecha a medida</p>
+    <p class="hero-desc">Repostería artesanal 100% personalizada en el corazón de Valladolid. Cada creación lleva tu sello, porque mereces que ese día no se olvide jamás.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/34602825808?text=Hola%20Real%20Dreams!%20Me%20gustaria%20hacer%20un%20pedido%20personalizado" class="btn-whatsapp" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.645.074-1.327-.657-2.19-1.2-3.074-2.77-.24-.42.24-.388.693-1.333.154-.298.077-.544-.038-.762-.115-.218-.671-1.612-.92-2.207-.241-.579-.486-.501-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004c-1.025 0-2.05-.312-2.919-.9C6.423 4.687 5.647 3.743 5.647 2.585c0-1.158.776-2.103 1.882-2.103 1.106 0 1.882.945 1.882 2.103 0 1.158-.776 2.102-1.882 2.102zm0-3.915c-.494 0-.894.4-.894 1.052 0 .65.4 1.053.894 1.053.494 0 .894-.402.894-1.053 0-.651-.4-1.052-.894-1.052zM2 22.5h20V2H2z"/></svg>
+        WhatsApp · Pedir Ahora
+      </a>
+      <a href="#galeria" class="btn-outline">Ver Creaciones →</a>
+    </div>
+  </div>
+
+  <div class="hero-images animate d2" style="z-index:1">
+    <div class="hero-img-wrap">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23f7d6d8' width='100' height='100'/%3E%3Ctext x='50' y='50' font-size='14' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EImagen 1%3C/text%3E%3C/svg%3E" alt="Pastel 1" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    <div class="hero-img-wrap tall">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23b8ddd4' width='100' height='100'/%3E%3Ctext x='50' y='50' font-size='14' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EImagen 2%3C/text%3E%3C/svg%3E" alt="Pastel 2" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+    <div class="hero-img-wrap">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23eea8ae' width='100' height='100'/%3E%3Ctext x='50' y='50' font-size='14' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EImagen 3%3C/text%3E%3C/svg%3E" alt="Pastel 3" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="sobre-nosotros">
+  <div class="about-inner">
+    <div class="about-img-collage">
+      <div class="about-img">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23f5e8d6' width='100' height='100'/%3E%3Ctext x='50' y='50' font-size='12' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EFoto%3C/text%3E%3C/svg%3E" alt="Nosotros 1">
+      </div>
+      <div class="about-img">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23f5e8d6' width='100' height='100'/%3E%3Ctext x='50' y='50' font-size='12' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EFoto%3C/text%3E%3C/svg%3E" alt="Nosotros 2">
+      </div>
+      <div class="about-img">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23f5e8d6' width='100' height='100'/%3E%3Ctext x='50' y='50' font-size='12' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EFoto%3C/text%3E%3C/svg%3E" alt="Nosotros 3">
+      </div>
+    </div>
+    <div>
+      <span class="section-label">Nuestra historia</span>
+      <h2 class="section-title">Amor y <em>creatividad</em> en cada creación</h2>
+      <div class="divider"></div>
+      <p class="section-desc">En Real Dreams creemos que cada celebración merece ser especial. Desde 2015, transformamos ingredientes premium en obras de arte comestibles, combinando técnica tradicional con diseño moderno.</p>
+      <div class="about-highlight">
+        <p>"No hacemos pasteles. Creamos experiencias que tus invitados recordarán siempre."</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Celebraciones</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">98%</div>
+          <div class="stat-label">Satisfacción</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">9 años</div>
+          <div class="stat-label">Experiencia</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="servicios">
+  <div class="services-inner">
+    <div class="services-header">
+      <span class="section-label">Nuestro catálogo</span>
+      <h2 class="section-title">Servicios <em>personalizados</em></h2>
+      <div class="divider" style="margin:1.2rem auto"></div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card animate d1">
+        <span class="service-icon">🎂</span>
+        <h3 class="service-name">Pasteles Premium</h3>
+        <p class="service-desc">Diseños exclusivos con sabores artesanales. Cada detalle personalizado según tu visión.</p>
+        <span class="service-tag">Desde 4 raciones</span>
+      </div>
+      <div class="service-card animate d2">
+        <span class="service-icon">🧁</span>
+        <h3 class="service-name">Cupcakes Gourmet</h3>
+        <p class="service-desc">Pequeñas delicias con gran impacto visual. Ideales para eventos corporativos y celebraciones.</p>
+        <span class="service-tag">Mínimo 12 unidades</span>
+      </div>
+      <div class="service-card animate d3">
+        <span class="service-icon">🍰</span>
+        <h3 class="service-name">Tartas Personalizadas</h3>
+        <p class="service-desc">Combinamos técnica repostera con arte. Cada tarta cuenta la historia de tu celebración.</p>
+        <span class="service-tag">Bajo encargo</span>
+      </div>
+      <div class="service-card animate d4">
+        <span class="service-icon">🎉</span>
+        <h3 class="service-name">Candy Bar Temático</h3>
+        <p class="service-desc">Mesas dulces coordinadas con tu evento. Decoración y sabores en perfecta armonía.</p>
+        <span class="service-tag">Consultar</span>
+      </div>
+      <div class="service-card animate d5">
+        <span class="service-icon">💐</span>
+        <h3 class="service-name">Decoración de Eventos</h3>
+        <p class="service-desc">Desde instalación hasta detalles florales. Creamos ambientes memorables.</p>
+        <span class="service-tag">A medida</span>
+      </div>
+      <div class="service-card animate d1" style="transition-delay:0.6s">
+        <span class="service-icon">🎓</span>
+        <h3 class="service-name">Talleres & Cursos</h3>
+        <p class="service-desc">Aprende técnicas de repostería artesanal con nuestros expertos. Clases presenciales.</p>
+        <span class="service-tag">Disponible</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="how-inner">
+    <div class="how-header">
+      <span class="section-label">El proceso</span>
+      <h2 class="section-title">¿Cómo <em>trabajamos</em>?</h2>
+      <div class="divider" style="margin:1.2rem auto"></div>
+    </div>
+    <div class="steps">
+      <div class="step animate d1">
+        <div class="step-num">1</div>
+        <h3 class="step-title">Consulta inicial</h3>
+        <p class="step-desc">Nos cuentas tu idea, fecha y presupuesto. Analizamos cada detalle para crear algo único.</p>
+      </div>
+      <div class="step animate d2">
+        <div class="step-num">2</div>
+        <h3 class="step-title">Propuesta personalizada</h3>
+        <p class="step-desc">Te presentamos opciones de diseño, sabores y precios. Iteramos hasta que sea perfecto.</p>
+      </div>
+      <div class="step animate d3">
+        <div class="step-num">3</div>
+        <h3 class="step-title">Creación & Entrega</h3>
+        <p class="step-desc">Elaboramos con pasión días antes. Entregamos en perfecto estado con instrucciones de conservación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="galeria">
+  <div class="gallery-inner">
+    <div class="gallery-header">
+      <span class="section-label">Nuestro trabajo</span>
+      <h2 class="section-title">Galería de <em>creaciones</em></h2>
+      <div class="divider" style="margin:1.2rem auto"></div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item span-rows">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='280'%3E%3Crect fill='%23c9a96e' width='400' height='280'/%3E%3Ctext x='200' y='140' font-size='20' fill='%23fff' text-anchor='middle' dominant-baseline='middle'%3EGalería 1%3C/text%3E%3C/svg%3E" alt="Galería 1">
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%23f7d6d8' width='200' height='200'/%3E%3Ctext x='100' y='100' font-size='14' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EGalería 2%3C/text%3E%3C/svg%3E" alt="Galería 2">
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%23b8ddd4' width='200' height='200'/%3E%3Ctext x='100' y='100' font-size='14' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EGalería 3%3C/text%3E%3C/svg%3E" alt="Galería 3">
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%23e8d5a3' width='200' height='200'/%3E%3Ctext x='100' y='100' font-size='14' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EGalería 4%3C/text%3E%3C/svg%3E" alt="Galería 4">
+        <div class="gallery-overlay"></div>
+      </div>
+      <div class="gallery-item">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect fill='%23fdf6ee' width='200' height='200'/%3E%3Ctext x='100' y='100' font-size='14' fill='%23999' text-anchor='middle' dominant-baseline='middle'%3EGalería 5%3C/text%3E%3C/svg%3E" alt="Galería 5">
+        <div class="gallery-overlay"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <span class="section-label">Opiniones</span>
+    <h2 class="section-title">Lo que dicen nuestros <em>clientes</em></h2>
+    <div class="divider" style="margin:1.2rem auto"></div>
+    <div class="reviews-grid">
+      <div class="review-card animate d1">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Fue exactamente lo que imaginamos. La atención fue impecable y el resultado espectacular. ¡Volveremos sin dudarlo!"</p>
+        <p class="reviewer">— María García · Boda 2024</p>
+      </div>
+      <div class="review-card animate d2">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"No solo es delicioso, es arte comestible. Mis invitados aún hablan del pastel. ¡Excelente trabajo!"</p>
+        <p class="reviewer">— Carlos López · Cumpleaños 2024</p>
+      </div>
+      <div class="review-card animate d3">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Creatividad sin límites. Transformaron mi idea loca en realidad. Un equipo profesional y amable."</p>
+        <p class="reviewer">— Ana Martínez · Aniversario 2024</p>
+      </div>
+      <div class="review-card animate d4">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"El mejor pastel que hemos probado. Personalización absoluta. Gracias Real Dreams por este momento."</p>
+        <p class="reviewer">— Roberto Sánchez · Evento Corporativo 2024</p>
+      </div>
+    </div>
+    <div class="trust-badges">
+      <div class="trust-item">
+        <span class="trust-icon">✓</span>
+        <span>500+ eventos exitosos</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">✓</span>
+        <span>98% de clientes satisfechos</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">✓</span>
+        <span>Garantía de satisfacción</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS -->
+<section class="hours-section">
+  <div class="hours-inner">
+    <div class="hours-info">
+      <span class="section-label">Disponibilidad</span>
+      <h2 class="section-title">Horarios</h2>
+      <p class="section-desc">Abiertos de lunes a sábado. Los domingos solo con cita previa para encargos especiales.</p>
+      <div class="hours-note">
+        <p>📢 <strong>Nota importante:</strong> Requiere 7-10 días de anticipación para diseños personalizados. Pedidos urgentes consultar disponibilidad.</p>
+      </div>
+    </div>
+    <div class="hours-table">
+      <div class="day-row">
+        <span class="day-name">Lunes</span>
+        <span class="day-hours">10:00 - 20:00</span>
+      </div>
+      <div class="day-row">
+        <span class="day-name">Martes</span>
+        <span class="day-hours">10:00 - 20:00</span>
+      </div>
+      <div class="day-row">
+        <span class="day-name">Miércoles</span>
+        <span class="day-hours">10:00 - 20:00</span>
+      </div>
+      <div class="day-row">
+        <span class="day-name">Jueves</span>
+        <span class="day-hours">10:00 - 20:00</span>
+      </div>
+      <div class="day-row">
+        <span class="day-name">Viernes</span>
+        <span class="day-hours">10:00 - 21:00</span>
+      </div>
+      <div class="day-row">
+        <span class="day-name">Sábado</span>
+        <span class="day-hours">09:00 - 21:00</span>
+      </div>
+      <div class="day-row">
+        <span class="day-name">Domingo</span>
+        <span class="day-hours">Cerrado (cita previa)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contacto">
+  <div class="contact-inner">
+    <div class="contact-grid">
+      <div class="contact-details">
+        <span class="section-label">Contacto</span>
+        <h2 class="section-title">¿Listo para tu <em>celebración</em>?</h2>
+        <div class="divider"></div>
+        
+        <div class="contact-item">
+          <span class="contact-item-icon">📍</span>
+          <div class="contact-item-text">
+            <strong>Dirección</strong>
+            <p>Calle Pastelería 123<br>47001 Valladolid, España</p>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-item-icon">📞</span>
+          <div class="contact-item-text">
+            <strong>Teléfono</strong>
+            <a href="tel:+34602825808">+34 602 825 808</a>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-item-icon">💬</span>
+          <div class="contact-item-text">
+            <strong>WhatsApp</strong>
+            <a href="https://wa.me/34602825808" target="_blank">+34 602 825 808</a>
+          </div>
+        </div>
+        
+        <div class="contact-item">
+          <span class="contact-item-icon">📧</span>
+          <div class="contact-item-text">
+            <strong>Email</strong>
+            <a href="mailto:hola@realdreams.es">hola@realdreams.es</a>
+          </div>
+        </div>
+        
+        <div class="contact-ctas">
+          <a href="https://wa.me/34602825808?text=Hola%20Real%20Dreams!%20Me%20gustaria%20hacer%20un%20pedido%20personalizado" class="btn-whatsapp" target="_blank" style="justify-content:center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.645.074-1.327-.657-2.19-1.2-3.074-2.77-.24-.42.24-.388.693-1.333.154-.298.077-.544-.038-.762-.115-.218-.671-1.612-.92-2.207-.241-.579-.486-.501-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004c-1.025 0-2.05-.312-2.919-.9C6.423 4.687 5.647 3.743 5.647 2.585c0-1.158.776-2.103 1.882-2.103 1.106 0 1.882.945 1.882 2.103 0 1.158-.776 2.102-1.882 2.102zm0-3.915c-.494 0-.894.4-.894 1.052 0 .65.4 1.053.894 1.053.494 0 .894-.402.894-1.053 0-.651-.4-1.052-.894-1.052zM2 22.5h20V2H2z"/></svg>
+            Contáctanos por WhatsApp
+          </a>
+        </div>
+      </div>
+      
+      <div class="map-wrap">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.5357649873996!2d-4.7502039!3d41.6523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4720d3d3d3d3d3d%3A0x3d3d3d3d3d3d3d3d!2sValladolid!5e0!3m2!1ses!2ses!4v1234567890" style="border:0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHATSAPP FLOATING -->
+<a href="https://wa.me/34602825808?text=Hola%20Real%20Dreams!%20Me%20gustaria%20hacer%20un%20pedido%20personalizado" class="wa-float" target="_blank" title="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.645.074-1.327-.657-2.19-1.2-3.074-2.77-.24-.42.24-.388.693-1.333.154-.298.077-.544-.038-.762-.115-.218-.671-1.612-.92-2.207-.241-.579-.486-.501-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004c-1.025 0-2.05-.312-2.919-.9C6.423 4.687 5.647 3.743 5.647 2.585c0-1.158.776-2.103 1.882-2.103 1.106 0 1.882.945 1.882 2.103 0 1.158-.776 2.102-1.882 2.102zm0-3.915c-.494 0-.894.4-.894 1.052 0 .65.4 1.053.894 1.053.494 0 .894-.402.894-1.053 0-.651-.4-1.052-.894-1.052zM2 22.5h20V2H2z"/></svg>
+</a>
+
+<!-- FOOTER -->
+<footer>
+  <h3 class="footer-logo">Real Dreams</h3>
+  <p class="footer-tagline">Pastelería Creativa · Valladolid</p>
+  <div class="footer-links">
+    <a href="#inicio">Inicio</a>
+    <a href="#sobre-nosotros">Nosotros</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#galeria">Galería</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <p class="footer-address">
+    Calle Pastelería 123, 47001 Valladolid, España<br>
+    Teléfono: +34 602 825 808 | Email: hola@realdreams.es
+  </p>
+  <p class="footer-copy">© 2024 Real Dreams. Todos los derechos reservados | <a href="#" style="color:var(--gold)">Política de privacidad</a></p>
+</footer>
+
+<script>
+// Navigation scroll effect
+window.addEventListener('scroll', function() {
+  const nav = document.getElementById('main-nav');
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+
+// Mobile menu toggle
+function toggleMenu() {
+  const navLinks = document.getElementById('nav-links');
+  const hamburger = document.getElementById('hamburger');
+  navLinks.classList.toggle('open');
+  hamburger.classList.toggle('active');
+}
+
+// Close menu when clicking a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', function() {
+    document.getElementById('nav-links').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('active');
+  });
+});
+
+// Intersection Observer for animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver(function(entries) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.animate, .animate-left, .animate-right, .animate-scale').forEach(el => {
+  observer.observe(el);
+});
+
+// Status badge - today or this weekend
+function updateStatusBadge() {
+  const badge = document.getElementById('status-badge');
+  const day = new Date().getDay();
+  const isClosed = day === 0; // Sunday
+  
+  if (isClosed) {
+    badge.className = 'status-bar status-closed';
+    badge.innerHTML = '<span class="status-dot"></span> Cerrado hoy · Abierto mañana desde 10h';
+  } else {
+    badge.className = 'status-bar status-open';
+    const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    badge.innerHTML = `<span class="status-dot"></span> Abierto hoy · Próxima cita: ${days[day]}`;
+  }
+}
+
+updateStatusBadge();
+
+// Scroll to top
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
